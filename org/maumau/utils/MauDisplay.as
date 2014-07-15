@@ -5,6 +5,7 @@ package org.maumau.utils
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Point;
 	import flash.filters.ColorMatrixFilter;
+	import org.maumau.math.MauVec2;
 	
 	
 	/**
@@ -109,6 +110,16 @@ package org.maumau.utils
 		public static function removeAllFilters(d:DisplayObject) : void
 		{
 			d.filters = [];
+		}
+		
+		public static function rotateAroundPoint(d:DisplayObject, degrees:Number, p:Point) : void
+		{
+			var dx:Number = d.x - p.x;
+			var dy:Number = d.y - p.y;
+			var newDxDy:Point = MauVec2.rotateByDegrees(new Point(dx, dy), degrees);
+			d.rotation += degrees;
+			d.x = p.x + newDxDy.x;
+			d.y = p.y + newDxDy.y;
 		}
 	}
 
